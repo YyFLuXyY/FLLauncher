@@ -1,0 +1,6 @@
+*.exe
+*.asar
+*.zip
+node_modules/
+.openai/
+publication.json
