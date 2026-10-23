@@ -1,1 +1,1 @@
-c167899f666860d033ea46a2f0d6a298339121d1275cfa613925fe12a5560c4b  FLLauncher-0.3.3-Windows.exe
+6f352fd5cddc9b2f0e36d31fdbab98de56acd92ab4016f5deef15b7db3a84756  FLLauncher-0.3.10-Windows.exe

@@ -2,7 +2,7 @@
 
 Independent Minecraft launcher and modpack manager for Windows x64.
 
-**[Project website](https://yyfluxyy.github.io/FLLauncher/) · [Compiled Windows release](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.3.3)**
+**[Project website](https://yyfluxyy.github.io/FLLauncher/) · [Compiled Windows release](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.3.10)**
 
 This public repository contains the project website and release information. The launcher source code is not published.
 
@@ -11,6 +11,9 @@ This public repository contains the project website and release information. The
 - Separate Java instances, Minecraft version and mod-loader selection, and automatic Java runtime installation.
 - Modrinth catalog, modpack import, installed-mod search and enable/disable controls.
 - A visual mod dependency map and optional AI assistance for questions and crash logs.
+- Drag-and-drop modpack/JAR import and MRPACK/ZIP export.
+- Manual system memory cleanup with synchronized live counters.
+- Optional Discord Rich Presence: FLLauncher, its icon, project link and a fixed description.
 - Windows Bedrock installation and launch through official Microsoft Store services, subject to platform and ownership requirements.
 
 ## Current Microsoft authentication status
@@ -19,9 +22,9 @@ FLLauncher has its own Microsoft application registration. Minecraft API access 
 
 ## Download
 
-Download **FLLauncher-0.3.3-Windows.exe** from [Releases](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.3.3). This is a portable Windows x64 application. No source build or Node.js installation is needed.
+Download **FLLauncher-0.3.10-Windows.exe** from [Releases](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.3.10). This is a portable Windows x64 application. No source build or Node.js installation is needed.
 
-SHA-256: `c167899f666860d033ea46a2f0d6a298339121d1275cfa613925fe12a5560c4b`
+SHA-256: `6f352fd5cddc9b2f0e36d31fdbab98de56acd92ab4016f5deef15b7db3a84756`
 
 ## Website
 
