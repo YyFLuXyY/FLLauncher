@@ -36,6 +36,8 @@ SHA-256: `4705be349cf51d643e7655f62ca59c02392c0e6d6f683b3db8d98d69d810f393`
 
 ## Website
 
+The [feature overview](https://yyfluxyy.github.io/FLLauncher/#functions) includes eight additional application screenshots, feature descriptions and a keyboard-accessible full-size viewer. The original mod-management and dependency-map previews are also available.
+
 The static site is in `index.html` with embedded styles, scripts and images. GitHub Pages publishes the `main` branch, `/ (root)` directory. No third-party scripts, analytics or sign-in are required to read the project page.
 
 ## Rights
