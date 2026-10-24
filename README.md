@@ -2,7 +2,7 @@
 
 Independent Minecraft launcher and modpack manager for Windows x64.
 
-**[Project website](https://yyfluxyy.github.io/FLLauncher/) · [Compiled Windows release](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.4.0)**
+**[Project website](https://yyfluxyy.github.io/FLLauncher/) · [Compiled Windows release](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.4.1)**
 
 This public repository contains the project website and release information. The launcher source code is not published.
 
@@ -16,19 +16,21 @@ This public repository contains the project website and release information. The
 - Optional Discord Rich Presence: FLLauncher, its icon, project link and a fixed description.
 - Windows Bedrock installation and launch through official Microsoft Store services, subject to platform and ownership requirements.
 
+- Current Microsoft profile skins, immediate Slim/Classic preview and model saving.
+- Faster repeated EXE starts: application files are expanded once and reused.
 - Launcher update notifications and one-click verified updates (from version 0.4.0 onward).
 - Selected-mod update checks, Ctrl+A selection and pinned mod/resource-pack/shader releases.
 - Instance change history with rollback, readable instance folders and a local screenshot gallery.
 
 ## Current Microsoft authentication status
 
-FLLauncher has its own Microsoft application registration. Minecraft API access has not been approved. Successful Microsoft or Xbox authentication alone does not grant Minecraft Services access. Publishing this page does not grant that approval. Minecraft is not included in the download.
+FLLauncher uses its own Microsoft application registration, approved for the Minecraft API allow list on October 23, 2026. Microsoft sign-in verifies Minecraft Java ownership. Minecraft is not included in the download.
 
 ## Download
 
-Download **FLLauncher-0.4.0-Windows.exe** from [Releases](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.4.0). This is a portable Windows x64 application. No source build or Node.js installation is needed.
+Download **FLLauncher-0.4.1-Windows.exe** from [Releases](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.4.1). This is a portable Windows x64 application. No source build or Node.js installation is needed.
 
-SHA-256: `637a69f3b3c9398ab6ed263a92910900a259954b2a0af03c62558576c0536a68`
+SHA-256: `2d103d483a4dfdba1dacc8f6b3115e3fd50095a9a22b03b469c108996ea78bde`
 
 ## Website
 
