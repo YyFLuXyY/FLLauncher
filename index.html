@@ -194,7 +194,36 @@ function animatePanel(element, direction = 0) {
 }
 
 const soundToggle = document.getElementById('sound-toggle');
-let soundEnabled = false, audioContext, audioMaster, liveVoices = 0, lastSound = -1;
+/* A small family of dry, damped textures. No pitched notes or frequency sweeps. */
+const soundProfiles = {
+  switch: { duration: .038, attack: .002, decay: .006, cutoff: 1500, peak: .042, seed: 1907 },
+  open: { duration: .062, attack: .004, decay: .011, cutoff: 1150, peak: .039, seed: 8311 },
+  download: { duration: .056, attack: .0025, decay: .009, cutoff: 850, peak: .045, seed: 4729 }
+};
+function createSoundBuffer(context, kind) {
+  const profile = soundProfiles[kind], buffer = context.createBuffer(1, Math.ceil(context.sampleRate * profile.duration), context.sampleRate);
+  const samples = buffer.getChannelData(0), lowPass = 1 - Math.exp(-2 * Math.PI * profile.cutoff / context.sampleRate), highPass = 1 - Math.exp(-2 * Math.PI * 140 / context.sampleRate);
+  let seed = profile.seed, low = 0, damped = 0, dc = 0, peak = 0;
+  for (let index = 0; index < samples.length; index++) {
+    seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5;
+    const noise = (seed >>> 0) / 2147483648 - 1, time = index / context.sampleRate;
+    low += lowPass * (noise - low); damped += lowPass * (low - damped); dc += highPass * (damped - dc);
+    const attack = Math.sin(Math.min(1, time / profile.attack) * Math.PI / 2) ** 2;
+    const tail = Math.min(1, (samples.length - 1 - index) / (context.sampleRate * .006));
+    samples[index] = ((damped - dc) * .82 + (low - damped) * .18) * attack * Math.exp(-time / profile.decay) * tail * tail;
+    peak = Math.max(peak, Math.abs(samples[index]));
+  }
+  const scale = peak ? profile.peak / peak : 0;
+  for (let index = 0; index < samples.length; index++) samples[index] *= scale;
+  return buffer;
+}
+let soundEnabled = false, audioContext, audioMaster, audioStarting = false, lastSound = -1, soundGeneration = 0;
+const soundBuffers = new Map(), activeSoundSources = new Set();
+function stopSounds() {
+  soundGeneration++;
+  for (const source of activeSoundSources) { try { source.stop(); } catch {} }
+  activeSoundSources.clear();
+}
 try { soundEnabled = localStorage.getItem('fllauncher-site-sound') === 'on'; } catch {}
 function renderSound() {
   soundToggle.setAttribute('aria-pressed', String(soundEnabled));
@@ -202,41 +231,38 @@ function renderSound() {
   soundToggle.setAttribute('aria-label', soundEnabled ? 'Выключить звуки интерфейса' : 'Включить звуки интерфейса');
   soundToggle.title = soundEnabled ? 'Звуки включены' : 'Включить звуки';
 }
-async function playSound(kind = 'click') {
-  if (!soundEnabled || document.hidden) return;
+async function playSound(kind) {
+  if (!soundProfiles[kind] || !soundEnabled || document.hidden || audioStarting) return;
+  const requestedAt = performance.now(), generation = soundGeneration;
   try {
     const Audio = window.AudioContext || window.webkitAudioContext;
     if (!Audio) return;
     if (!audioContext) {
       audioContext = new Audio();
-      audioMaster = audioContext.createGain(); audioMaster.gain.value = .16;
+      audioMaster = audioContext.createGain(); audioMaster.gain.value = .32;
       audioMaster.connect(audioContext.destination);
     }
-    if (audioContext.state !== 'running') await audioContext.resume();
-    if (!soundEnabled || document.hidden || audioContext.state !== 'running' || liveVoices >= 4) return;
+    if (audioContext.state !== 'running') {
+      audioStarting = true;
+      try { await audioContext.resume(); } finally { audioStarting = false; }
+    }
+    if (!soundEnabled || document.hidden || generation !== soundGeneration || performance.now() - requestedAt > 180 || audioContext.state !== 'running' || activeSoundSources.size >= 2) return;
     const now = audioContext.currentTime;
-    if (now - lastSound < .055) return;
+    if (now - lastSound < .1) return;
     lastSound = now;
-    const tones = {
-      click: [640, 510, .055], navigate: [510, 760, .085], switch: [720, 900, .075],
-      open: [420, 670, .11], close: [620, 400, .09], download: [660, 1040, .14]
-    };
-    const [start, end, duration] = tones[kind] || tones.click;
-    const oscillator = audioContext.createOscillator(), envelope = audioContext.createGain();
-    oscillator.type = 'sine'; oscillator.frequency.setValueAtTime(start, now);
-    oscillator.frequency.exponentialRampToValueAtTime(end, now + duration);
-    envelope.gain.setValueAtTime(0, now); envelope.gain.linearRampToValueAtTime(.15, now + .008);
-    envelope.gain.exponentialRampToValueAtTime(.0001, now + duration);
-    oscillator.connect(envelope); envelope.connect(audioMaster); liveVoices++;
-    oscillator.onended = () => { oscillator.disconnect(); envelope.disconnect(); liveVoices--; };
-    oscillator.start(now); oscillator.stop(now + duration + .01);
+    if (!soundBuffers.has(kind)) soundBuffers.set(kind, createSoundBuffer(audioContext, kind));
+    const source = audioContext.createBufferSource(); source.buffer = soundBuffers.get(kind);
+    source.connect(audioMaster); activeSoundSources.add(source);
+    source.onended = () => { source.disconnect(); activeSoundSources.delete(source); };
+    source.start(now);
   } catch { /* Audio is optional; navigation and downloads always keep working. */ }
 }
 renderSound();
 soundToggle.addEventListener('click', () => {
   soundEnabled = !soundEnabled; renderSound();
   try { localStorage.setItem('fllauncher-site-sound', soundEnabled ? 'on' : 'off'); } catch {}
-  if (soundEnabled) playSound('open');
+  if (soundEnabled) playSound('switch');
+  else stopSounds();
 });
 
 /* Tabs keep native keyboard semantics, with a moving active marker. */
@@ -259,6 +285,7 @@ function selectTab(tab, withAnimation = true) {
     if (selected && changed && withAnimation) animatePanel(panel);
   }
   syncTabMarker();
+  if (changed && withAnimation) playSound('switch');
 }
 selectTab(tabs.find(tab => tab.getAttribute('aria-selected') === 'true') || tabs[0], false);
 tabList.classList.add('is-enhanced');
@@ -271,7 +298,7 @@ for (const [index, tab] of tabs.entries()) {
     if (event.key === 'ArrowLeft') next = tabs[(index + tabs.length - 1) % tabs.length];
     if (event.key === 'Home') next = tabs[0];
     if (event.key === 'End') next = tabs.at(-1);
-    if (next) { event.preventDefault(); selectTab(next); next.focus(); playSound('switch'); }
+    if (next) { event.preventDefault(); selectTab(next); next.focus(); }
   });
 }
 if ('ResizeObserver' in window) new ResizeObserver(syncTabMarker).observe(tabList);
@@ -285,7 +312,10 @@ const viewerLoading = document.getElementById('viewer-loading');
 let currentScreen = 0, returnToScreen = null, imageRequest = 0, viewerClosing = false, closeAnimation;
 function showScreen(index, direction = 0) {
   if (viewerClosing) return;
-  currentScreen = (index + screenButtons.length) % screenButtons.length;
+  const next = (index + screenButtons.length) % screenButtons.length;
+  if (direction && next === currentScreen && viewerImage.hasAttribute('src')) return;
+  currentScreen = next;
+  if (direction) playSound('switch');
   const button = screenButtons[currentScreen], card = button.closest('.overview-card'), preview = button.closest('.preview');
   const img = button.querySelector('img'), request = ++imageRequest;
   document.getElementById('viewer-title').textContent = card ? card.querySelector('h3').textContent : document.getElementById(preview.getAttribute('aria-labelledby')).textContent;
@@ -321,6 +351,7 @@ function closeViewer() {
 }
 for (const [index, button] of screenButtons.entries()) button.addEventListener('click', () => {
   returnToScreen = button; viewerClosing = false;
+  if (!screenViewer.open) playSound('open');
   elementAnimations.get(screenViewer)?.cancel(); screenViewer.classList.remove('is-closing');
   screenViewer.showModal(); document.body.classList.add('viewer-open');
   showScreen(index);
@@ -328,7 +359,7 @@ for (const [index, button] of screenButtons.entries()) button.addEventListener('
 document.getElementById('viewer-close').addEventListener('click', closeViewer);
 document.getElementById('viewer-prev').addEventListener('click', () => showScreen(currentScreen - 1, -1));
 document.getElementById('viewer-next').addEventListener('click', () => showScreen(currentScreen + 1, 1));
-screenViewer.addEventListener('cancel', event => { event.preventDefault(); closeViewer(); playSound('close'); });
+screenViewer.addEventListener('cancel', event => { event.preventDefault(); closeViewer(); });
 screenViewer.addEventListener('keydown', event => {
   if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || viewerClosing) return;
   let next;
@@ -336,7 +367,7 @@ screenViewer.addEventListener('keydown', event => {
   if (event.key === 'ArrowLeft') next = currentScreen - 1;
   if (event.key === 'Home') next = 0;
   if (event.key === 'End') next = screenButtons.length - 1;
-  if (next !== undefined) { event.preventDefault(); showScreen(next, next > currentScreen ? 1 : -1); playSound('switch'); }
+  if (next !== undefined) { event.preventDefault(); showScreen(next, next > currentScreen ? 1 : -1); }
 });
 let backdropPress = false, swipeStart = null;
 function outsideViewer(event) {
@@ -344,13 +375,13 @@ function outsideViewer(event) {
   return event.target === screenViewer && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom);
 }
 screenViewer.addEventListener('pointerdown', event => { backdropPress = outsideViewer(event); });
-screenViewer.addEventListener('click', event => { if (backdropPress && outsideViewer(event)) { closeViewer(); playSound('close'); } backdropPress = false; });
+screenViewer.addEventListener('click', event => { if (backdropPress && outsideViewer(event)) closeViewer(); backdropPress = false; });
 viewerStage.addEventListener('pointerdown', event => { if (event.pointerType === 'touch' && event.isPrimary) swipeStart = { x: event.clientX, y: event.clientY }; });
 viewerStage.addEventListener('pointercancel', () => { swipeStart = null; });
 viewerStage.addEventListener('pointerup', event => {
   if (!swipeStart) return;
   const dx = event.clientX - swipeStart.x, dy = event.clientY - swipeStart.y; swipeStart = null;
-  if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4) { showScreen(currentScreen + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1); playSound('switch'); }
+  if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4) showScreen(currentScreen + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
 });
 screenViewer.addEventListener('close', () => {
   if (screenViewer.open) return;
@@ -376,6 +407,7 @@ const faqControllers = [...document.querySelectorAll('.faq-list details')].map(d
     if (!controller.animation) controller.desired = details.open;
     const start = details.getBoundingClientRect().height, generation = ++controller.generation;
     controller.animation?.cancel(); controller.desired = !controller.desired;
+    if (controller.desired) playSound('open');
     details.open = true; details.dataset.expanded = String(controller.desired);
     summary.setAttribute('aria-expanded', String(controller.desired)); details.classList.add('is-animating'); details.style.overflow = 'hidden';
     const end = summary.getBoundingClientRect().height + (controller.desired ? answer.getBoundingClientRect().height : 0) + 1;
@@ -458,6 +490,7 @@ downloadLink.addEventListener('click', event => {
   document.getElementById('download-filename').textContent = decodeURIComponent(new URL(downloadLink.href).pathname.split('/').pop());
   document.getElementById('download-request-meta').textContent = document.getElementById('file-info').textContent;
   downloadLink.querySelector('.download-label').textContent = 'Скачать ещё раз'; downloadFeedback.hidden = false;
+  playSound('download');
   downloadRequestStatus.textContent = `Запрос на скачивание FLLauncher отправлен${downloadRequests > 1 ? ' повторно, запрос ' + downloadRequests : ''}. Проверь загрузки браузера.`;
   if (!reducedMotion.matches) {
     void downloadLink.offsetWidth; downloadLink.classList.add('is-downloading'); downloadFeedback.classList.add('is-launching');
@@ -466,20 +499,7 @@ downloadLink.addEventListener('click', event => {
 });
 reducedMotion.addEventListener('change', () => { if (reducedMotion.matches) clearDownloadEffect(); });
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) { clearDownloadEffect(); audioContext?.suspend().catch(() => {}); }
-});
-document.addEventListener('click', event => {
-  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-  const control = event.target.closest('a,button,summary');
-  if (!control || control === soundToggle) return;
-  let kind = 'click';
-  if (control === downloadLink) kind = 'download';
-  else if (control.matches('summary')) kind = control.getAttribute('aria-expanded') === 'true' ? 'open' : 'close';
-  else if (control.matches('[data-screen]')) kind = 'open';
-  else if (control.matches('.viewer-close')) kind = 'close';
-  else if (control.matches('.viewer-arrow,[data-preview]')) kind = 'switch';
-  else if (control.matches('a[href^="#"],#back-to-top')) kind = 'navigate';
-  playSound(kind);
+  if (document.hidden) { clearDownloadEffect(); stopSounds(); audioContext?.suspend().catch(() => {}); }
 });
 </script>
 </body>
