@@ -78,7 +78,7 @@ body.viewer-open{overflow:hidden}.screen-viewer{width:min(1500px,calc(100% - 48p
 @keyframes download-target-pulse{0%,100%{border-color:#43532c}40%{border-color:#98c64a}}
 @media(max-width:650px){.download-feedback{grid-template-columns:36px minmax(0,1fr);gap:12px;padding:17px 15px;margin-top:20px}.download-file-symbol{width:36px;height:43px}.download-file-symbol .ui-icon{width:21px;height:21px}.download-feedback-copy strong{font-size:13px}.download-feedback-copy p{font-size:11px}}
 
-/* Complete interaction polish: tactile controls, stable layouts and opt-in SFX. */
+/* Complete interaction polish: tactile controls, stable layouts without audio. */
 html{scrollbar-gutter:stable}body{overflow-wrap:break-word}.skip-link{position:fixed;left:18px;top:12px;z-index:120;padding:12px 18px;background:var(--lime);color:#17210a;border-radius:6px;translate:0 -150%;font-size:14px;font-weight:650}.skip-link:focus{translate:0 0}.page-progress{position:fixed;top:0;left:0;width:100%;height:2px;background:var(--lime);transform:scaleX(0);transform-origin:left;z-index:90;pointer-events:none}
 .header{gap:22px}.header nav{gap:25px}.header nav>a{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:44px}.header nav>a:not(.nav-download)::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:2px;background:var(--lime);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--motion-ease)}.header nav>a[aria-current=location]{color:var(--lime)}.header nav>a[aria-current=location]:not(.nav-download)::after{transform:scaleX(1)}.header nav>a:not(.nav-download):hover{text-decoration:none}.brand{transition:opacity .2s}.brand:active{opacity:.75}
 .button,.viewer-arrow,.viewer-close,.tool-button,.screen-button{transition:background .2s,border-color .2s,box-shadow .2s,translate .24s var(--motion-ease),scale .14s var(--motion-ease)}.button:active,.viewer-arrow:active,.viewer-close:active,.tool-button:active{scale:.97}.screen-button:active img{transform:scale(.993)}
@@ -86,7 +86,7 @@ html{scrollbar-gutter:stable}body{overflow-wrap:break-word}.skip-link{position:f
 .edition-strip span{transition:color .2s}.features article,.more-features article{transition:color .2s,translate .3s var(--motion-ease)}.feature-num{display:inline-block;transition:translate .3s var(--motion-ease)}.feature-tags span{transition:background .2s,border-color .2s}.download-links a{display:inline-flex;align-items:center;min-height:32px}
 .faq-answer{display:flow-root}.faq-list details>p,.faq-answer p{animation:none!important}.faq-list details[data-expanded=false] summary .ui-icon{transform:rotate(0)}.faq-list details[data-expanded=true] summary .ui-icon{transform:rotate(45deg)}.faq-list details{transition:border-color .2s}.faq-list details[open]{border-bottom-color:#607742}.faq-list summary{min-height:64px}.faq-list details:focus-within{border-color:#819f4b}
 .screen-viewer[open]{animation:viewer-enter .24s var(--motion-ease)}.screen-viewer.is-closing::backdrop{animation:backdrop-exit .16s ease-in both}.viewer-head{position:sticky;top:0;background:#11170d;z-index:2}.viewer-stage{height:min(62dvh,calc((100vw - 50px)*.652174));min-height:120px;display:grid;grid-template-rows:minmax(0,1fr);grid-template-columns:minmax(0,1fr);place-items:center;position:relative;background:#0d130a;overflow:hidden;touch-action:pan-y pinch-zoom}.viewer-image{display:block;width:100%;height:100%;min-width:0;min-height:0;max-width:100%;max-height:100%;object-fit:contain;grid-area:1/1;user-select:none;-webkit-user-drag:none}.viewer-stage[aria-busy=true] .viewer-image{opacity:0}.viewer-loading{grid-area:1/1;z-index:1;color:var(--muted);font-size:12px;padding:24px;text-align:center;max-width:340px}.viewer-footer{min-height:102px}.viewer-footer p{max-width:850px}.viewer-arrow,.viewer-close{width:44px;min-width:44px;height:44px}.viewer-count{min-width:42px;font-variant-numeric:tabular-nums}
-.site-tools{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:end;gap:9px;z-index:40}.tool-button{width:44px;height:44px;display:grid;place-items:center;border:1px solid #4b5e33;border-radius:8px;background:#1c2716;color:var(--muted);box-shadow:0 3px 14px #080c0759;position:relative}.tool-button .ui-icon{width:19px;height:19px}.tool-button:focus-visible{outline-offset:4px}.tool-label{position:absolute;right:54px;top:50%;translate:0 -50%;white-space:nowrap;font-size:11px;padding:8px 11px;border:1px solid var(--line);border-radius:5px;background:#1a2414;color:var(--ink);opacity:0;pointer-events:none;transition:opacity .16s,translate .2s var(--motion-ease)}.tool-button:focus-visible .tool-label{opacity:1;translate:-2px -50%}.sound-toggle[data-enabled=true]{color:var(--lime);border-color:#789a40}.sound-toggle .sound-waves{display:none}.sound-toggle[data-enabled=true] .sound-waves{display:inline}.sound-toggle[data-enabled=true] .sound-muted{display:none}.back-to-top:not([hidden]){animation:tool-enter .24s var(--motion-ease)}
+.site-tools{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:end;gap:9px;z-index:40}.tool-button{width:44px;height:44px;display:grid;place-items:center;border:1px solid #4b5e33;border-radius:8px;background:#1c2716;color:var(--muted);box-shadow:0 3px 14px #080c0759;position:relative}.tool-button .ui-icon{width:19px;height:19px}.tool-button:focus-visible{outline-offset:4px}.tool-label{position:absolute;right:54px;top:50%;translate:0 -50%;white-space:nowrap;font-size:11px;padding:8px 11px;border:1px solid var(--line);border-radius:5px;background:#1a2414;color:var(--ink);opacity:0;pointer-events:none;transition:opacity .16s,translate .2s var(--motion-ease)}.tool-button:focus-visible .tool-label{opacity:1;translate:-2px -50%}.back-to-top:not([hidden]){animation:tool-enter .24s var(--motion-ease)}
 @keyframes tool-enter{from{opacity:0;translate:0 6px}to{opacity:1;translate:0 0}}@keyframes backdrop-exit{to{opacity:0}}
 @media(hover:hover) and (pointer:fine){.tool-button:hover{background:#2d3c20;color:var(--lime);border-color:#8cae4d;translate:0 -2px}.tool-button:hover .tool-label{opacity:1;translate:-2px -50%}.header nav>a:not(.nav-download):hover::after{transform:scaleX(1)}.preview-tabs button:hover{color:var(--lime)}.features article:hover .feature-num{translate:4px 0}.more-features article:hover{translate:0 -3px}.edition-strip span:hover{color:var(--lime)}.feature-tags span:hover{background:#25351a;border-color:#647d3e}}
 @media(hover:none),(pointer:coarse){.button:hover{translate:none}.button.primary:hover .ui-icon,.button.secondary:hover .ui-icon,.nav-download:hover .ui-icon,.screen-button:hover .screen-expand{transform:none}.screen-button:hover img{transform:none;opacity:1}.overview-card:hover{translate:none;box-shadow:none}.tool-label{display:none}.screen-expand{width:38px;height:38px}}
@@ -172,8 +172,8 @@ html{scrollbar-gutter:stable}body{overflow-wrap:break-word}.skip-link{position:f
   </main>
   <footer class="footer wrap"><a class="brand" href="#"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZmlsbD0iI2I2ZWQ1MyIgZD0iTTE2IDE2aDIyNHYxNjBsLTY0IDY0SDE2eiIvPjxwYXRoIGZpbGw9IiMxYTI2MGUiIGQ9Ik02MSA2NWg5OXYyOUg5NHYyNGg1M3YyOEg5NHY1MUg2MXpNMTY2IDExMGgyOXY1OGgyNHYyOWgtNTN6Ii8+PC9zdmc+" alt="" width="30" height="30"><span>FLLauncher<span class="lime">.</span></span></a><div><p>© 2026 FLLauncher. All rights reserved.</p><p>Независимый проект. Не связан с Mojang или Microsoft.</p></div></footer>
 <dialog class="screen-viewer" id="screen-viewer" aria-labelledby="viewer-title" aria-describedby="viewer-caption"><div class="viewer-head"><h2 id="viewer-title"></h2><button class="viewer-close" id="viewer-close" aria-label="Закрыть скриншот" autofocus><svg class="ui-icon " viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div><div class="viewer-stage" aria-busy="false"><img class="viewer-image" id="viewer-image" alt="" width="1380" height="900"><span class="viewer-loading" id="viewer-loading" role="status" hidden></span></div><div class="viewer-footer"><p id="viewer-caption"></p><div class="viewer-controls"><button class="viewer-arrow" id="viewer-prev" aria-label="Предыдущий скриншот"><svg class="ui-icon " viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 12H4m6-6-6 6 6 6"/></svg></button><span class="viewer-count" id="viewer-count" aria-live="polite"></span><button class="viewer-arrow" id="viewer-next" aria-label="Следующий скриншот"><svg class="ui-icon " viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button></div></div></dialog>
-<div class="site-tools" hidden><button class="tool-button back-to-top" id="back-to-top" aria-label="Наверх" hidden><svg class="ui-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20V4m-6 6 6-6 6 6"/></svg><span class="tool-label" aria-hidden="true">Наверх</span></button><button class="tool-button sound-toggle" id="sound-toggle" aria-pressed="false" aria-label="Включить звуки интерфейса" data-enabled="false"><svg class="ui-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m11 5-5 4H3v6h3l5 4V5Z"/><g class="sound-waves"><path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></g><g class="sound-muted"><path d="m16 9 6 6m0-6-6 6"/></g></svg><span class="tool-label" aria-hidden="true">Звуки интерфейса</span></button></div>
-<script>/* Local, optional sound effects: no audio files, requests or autoplay. */
+<div class="site-tools" hidden><button class="tool-button back-to-top" id="back-to-top" aria-label="Наверх" hidden><svg class="ui-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20V4m-6 6 6-6 6 6"/></svg><span class="tool-label" aria-hidden="true">Наверх</span></button></div>
+<script>/* Visual interactions only. */
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const pageAnimations = new Set();
 const elementAnimations = new WeakMap();
@@ -192,78 +192,6 @@ function animateElement(element, frames, options = {}) {
 function animatePanel(element, direction = 0) {
   return animateElement(element, [{ opacity: .2, transform: `translate(${direction * 14}px,${direction ? 0 : 5}px)` }, { opacity: 1, transform: 'translate(0,0)' }], { duration: 240 });
 }
-
-const soundToggle = document.getElementById('sound-toggle');
-/* A small family of dry, damped textures. No pitched notes or frequency sweeps. */
-const soundProfiles = {
-  switch: { duration: .038, attack: .002, decay: .006, cutoff: 1500, peak: .042, seed: 1907 },
-  open: { duration: .062, attack: .004, decay: .011, cutoff: 1150, peak: .039, seed: 8311 },
-  download: { duration: .056, attack: .0025, decay: .009, cutoff: 850, peak: .045, seed: 4729 }
-};
-function createSoundBuffer(context, kind) {
-  const profile = soundProfiles[kind], buffer = context.createBuffer(1, Math.ceil(context.sampleRate * profile.duration), context.sampleRate);
-  const samples = buffer.getChannelData(0), lowPass = 1 - Math.exp(-2 * Math.PI * profile.cutoff / context.sampleRate), highPass = 1 - Math.exp(-2 * Math.PI * 140 / context.sampleRate);
-  let seed = profile.seed, low = 0, damped = 0, dc = 0, peak = 0;
-  for (let index = 0; index < samples.length; index++) {
-    seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5;
-    const noise = (seed >>> 0) / 2147483648 - 1, time = index / context.sampleRate;
-    low += lowPass * (noise - low); damped += lowPass * (low - damped); dc += highPass * (damped - dc);
-    const attack = Math.sin(Math.min(1, time / profile.attack) * Math.PI / 2) ** 2;
-    const tail = Math.min(1, (samples.length - 1 - index) / (context.sampleRate * .006));
-    samples[index] = ((damped - dc) * .82 + (low - damped) * .18) * attack * Math.exp(-time / profile.decay) * tail * tail;
-    peak = Math.max(peak, Math.abs(samples[index]));
-  }
-  const scale = peak ? profile.peak / peak : 0;
-  for (let index = 0; index < samples.length; index++) samples[index] *= scale;
-  return buffer;
-}
-let soundEnabled = false, audioContext, audioMaster, audioStarting = false, lastSound = -1, soundGeneration = 0;
-const soundBuffers = new Map(), activeSoundSources = new Set();
-function stopSounds() {
-  soundGeneration++;
-  for (const source of activeSoundSources) { try { source.stop(); } catch {} }
-  activeSoundSources.clear();
-}
-try { soundEnabled = localStorage.getItem('fllauncher-site-sound') === 'on'; } catch {}
-function renderSound() {
-  soundToggle.setAttribute('aria-pressed', String(soundEnabled));
-  soundToggle.dataset.enabled = String(soundEnabled);
-  soundToggle.setAttribute('aria-label', soundEnabled ? 'Выключить звуки интерфейса' : 'Включить звуки интерфейса');
-  soundToggle.title = soundEnabled ? 'Звуки включены' : 'Включить звуки';
-}
-async function playSound(kind) {
-  if (!soundProfiles[kind] || !soundEnabled || document.hidden || audioStarting) return;
-  const requestedAt = performance.now(), generation = soundGeneration;
-  try {
-    const Audio = window.AudioContext || window.webkitAudioContext;
-    if (!Audio) return;
-    if (!audioContext) {
-      audioContext = new Audio();
-      audioMaster = audioContext.createGain(); audioMaster.gain.value = .32;
-      audioMaster.connect(audioContext.destination);
-    }
-    if (audioContext.state !== 'running') {
-      audioStarting = true;
-      try { await audioContext.resume(); } finally { audioStarting = false; }
-    }
-    if (!soundEnabled || document.hidden || generation !== soundGeneration || performance.now() - requestedAt > 180 || audioContext.state !== 'running' || activeSoundSources.size >= 2) return;
-    const now = audioContext.currentTime;
-    if (now - lastSound < .1) return;
-    lastSound = now;
-    if (!soundBuffers.has(kind)) soundBuffers.set(kind, createSoundBuffer(audioContext, kind));
-    const source = audioContext.createBufferSource(); source.buffer = soundBuffers.get(kind);
-    source.connect(audioMaster); activeSoundSources.add(source);
-    source.onended = () => { source.disconnect(); activeSoundSources.delete(source); };
-    source.start(now);
-  } catch { /* Audio is optional; navigation and downloads always keep working. */ }
-}
-renderSound();
-soundToggle.addEventListener('click', () => {
-  soundEnabled = !soundEnabled; renderSound();
-  try { localStorage.setItem('fllauncher-site-sound', soundEnabled ? 'on' : 'off'); } catch {}
-  if (soundEnabled) playSound('switch');
-  else stopSounds();
-});
 
 /* Tabs keep native keyboard semantics, with a moving active marker. */
 const tabs = [...document.querySelectorAll('[data-preview]')];
@@ -285,7 +213,6 @@ function selectTab(tab, withAnimation = true) {
     if (selected && changed && withAnimation) animatePanel(panel);
   }
   syncTabMarker();
-  if (changed && withAnimation) playSound('switch');
 }
 selectTab(tabs.find(tab => tab.getAttribute('aria-selected') === 'true') || tabs[0], false);
 tabList.classList.add('is-enhanced');
@@ -315,7 +242,6 @@ function showScreen(index, direction = 0) {
   const next = (index + screenButtons.length) % screenButtons.length;
   if (direction && next === currentScreen && viewerImage.hasAttribute('src')) return;
   currentScreen = next;
-  if (direction) playSound('switch');
   const button = screenButtons[currentScreen], card = button.closest('.overview-card'), preview = button.closest('.preview');
   const img = button.querySelector('img'), request = ++imageRequest;
   document.getElementById('viewer-title').textContent = card ? card.querySelector('h3').textContent : document.getElementById(preview.getAttribute('aria-labelledby')).textContent;
@@ -351,7 +277,6 @@ function closeViewer() {
 }
 for (const [index, button] of screenButtons.entries()) button.addEventListener('click', () => {
   returnToScreen = button; viewerClosing = false;
-  if (!screenViewer.open) playSound('open');
   elementAnimations.get(screenViewer)?.cancel(); screenViewer.classList.remove('is-closing');
   screenViewer.showModal(); document.body.classList.add('viewer-open');
   showScreen(index);
@@ -407,7 +332,6 @@ const faqControllers = [...document.querySelectorAll('.faq-list details')].map(d
     if (!controller.animation) controller.desired = details.open;
     const start = details.getBoundingClientRect().height, generation = ++controller.generation;
     controller.animation?.cancel(); controller.desired = !controller.desired;
-    if (controller.desired) playSound('open');
     details.open = true; details.dataset.expanded = String(controller.desired);
     summary.setAttribute('aria-expanded', String(controller.desired)); details.classList.add('is-animating'); details.style.overflow = 'hidden';
     const end = summary.getBoundingClientRect().height + (controller.desired ? answer.getBoundingClientRect().height : 0) + 1;
@@ -490,7 +414,6 @@ downloadLink.addEventListener('click', event => {
   document.getElementById('download-filename').textContent = decodeURIComponent(new URL(downloadLink.href).pathname.split('/').pop());
   document.getElementById('download-request-meta').textContent = document.getElementById('file-info').textContent;
   downloadLink.querySelector('.download-label').textContent = 'Скачать ещё раз'; downloadFeedback.hidden = false;
-  playSound('download');
   downloadRequestStatus.textContent = `Запрос на скачивание FLLauncher отправлен${downloadRequests > 1 ? ' повторно, запрос ' + downloadRequests : ''}. Проверь загрузки браузера.`;
   if (!reducedMotion.matches) {
     void downloadLink.offsetWidth; downloadLink.classList.add('is-downloading'); downloadFeedback.classList.add('is-launching');
@@ -499,7 +422,7 @@ downloadLink.addEventListener('click', event => {
 });
 reducedMotion.addEventListener('change', () => { if (reducedMotion.matches) clearDownloadEffect(); });
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) { clearDownloadEffect(); stopSounds(); audioContext?.suspend().catch(() => {}); }
+  if (document.hidden) { clearDownloadEffect(); }
 });
 </script>
 </body>
