@@ -1,2 +1,2 @@
-4705be349cf51d643e7655f62ca59c02392c0e6d6f683b3db8d98d69d810f393  FLLauncher-0.4.2-Windows.exe
-9fee9884eb9525ab691f2a96c9b8a2c7ddaf787bde1493c2f298d4ccb429fd93  FLLauncher-0.4.2-Windows-update.zip
+bcb125981f915e6a0ce03847aa084f508aff52d70f788d40bf1a920f620667cb  FLLauncher-0.4.3-Windows.exe
+1d84dbd42ab62da1240362de876bc60b279ac12b78337833891fe1b3ff83e6bd  FLLauncher-0.4.3-Windows-update.zip

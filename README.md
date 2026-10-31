@@ -2,7 +2,7 @@
 
 Independent Minecraft launcher and modpack manager for Windows x64.
 
-**[Project website](https://yyfluxyy.github.io/FLLauncher/) · [Compiled Windows release](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.4.2)**
+**[Project website](https://yyfluxyy.github.io/FLLauncher/) · [Compiled Windows release](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.4.3)**
 
 This public repository contains the project website and release information. The launcher source code is not published.
 
@@ -11,7 +11,7 @@ This public repository contains the project website and release information. The
 - Separate Java instances, Minecraft version and mod-loader selection, and automatic Java runtime installation.
 - Modrinth catalog, modpack import, installed-mod search and enable/disable controls.
 - A visual mod dependency map and optional AI assistance for questions and crash logs.
-- Drag-and-drop modpack/JAR import and MRPACK/ZIP export.
+- Drag-and-drop modpack/JAR import and MRPACK/ZIP export. Streaming ZIP64 supports archives up to 64 GiB without loading entire packs into memory.
 - Manual system memory cleanup with synchronized live counters.
 - Optional Discord Rich Presence: FLLauncher, its icon, project link and a fixed description.
 - Windows Bedrock installation and launch through official Microsoft Store services, subject to platform and ownership requirements.
@@ -30,9 +30,9 @@ FLLauncher uses its own Microsoft application registration, approved for the Min
 
 ## Download
 
-Download **FLLauncher-0.4.2-Windows.exe** from [Releases](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.4.2). This is a portable Windows x64 application. No source build or Node.js installation is needed.
+Download **FLLauncher-0.4.3-Windows.exe** from [Releases](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.4.3). This is a portable Windows x64 application. No source build or Node.js installation is needed.
 
-SHA-256: `4705be349cf51d643e7655f62ca59c02392c0e6d6f683b3db8d98d69d810f393`
+SHA-256: `bcb125981f915e6a0ce03847aa084f508aff52d70f788d40bf1a920f620667cb`
 
 ## Website
 
