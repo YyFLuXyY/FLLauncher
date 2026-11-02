@@ -2,7 +2,7 @@
 
 Independent Minecraft launcher and modpack manager for Windows x64.
 
-**[Project website](https://yyfluxyy.github.io/FLLauncher/) · [Compiled Windows release](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.4.3)**
+**[Project website](https://yyfluxyy.github.io/FLLauncher/) · [Compiled Windows release](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.4.5)**
 
 This public repository contains the project website and release information. The launcher source code is not published.
 
@@ -20,7 +20,7 @@ This public repository contains the project website and release information. The
 - Skin-head avatars beside the account nickname.
 - Current Microsoft profile skins, immediate Slim/Classic preview and model saving.
 - Faster repeated EXE starts: application files are expanded once and reused.
-- Launcher update notifications and one-click verified updates (from version 0.4.0 onward).
+- Launcher update notifications and a dedicated Settings → Updates page: one click checks and downloads a new release, then a separate button installs and restarts the app.
 - Selected-mod update checks, Ctrl+A selection and pinned mod/resource-pack/shader releases.
 - Instance change history with rollback, readable instance folders and a local screenshot gallery.
 
@@ -30,9 +30,9 @@ FLLauncher uses its own Microsoft application registration, approved for the Min
 
 ## Download
 
-Download **FLLauncher-0.4.3-Windows.exe** from [Releases](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.4.3). This is a portable Windows x64 application. No source build or Node.js installation is needed.
+Download **FLLauncher-0.4.5-Windows.exe** from [Releases](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.4.5). This is a portable Windows x64 application. No source build or Node.js installation is needed.
 
-SHA-256: `bcb125981f915e6a0ce03847aa084f508aff52d70f788d40bf1a920f620667cb`
+SHA-256: `80b08adf6f3ff5c2bcec1b2c7184b0f9bed9d5ec3e72b91ec33e0ed65b50cf81`
 
 ## Website
 
