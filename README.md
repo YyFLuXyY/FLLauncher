@@ -2,7 +2,7 @@
 
 Independent Minecraft launcher and modpack manager for Windows x64.
 
-**[Project website](https://yyfluxyy.github.io/FLLauncher/) · [Compiled Windows release](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.5.1)**
+**[Project website](https://yyfluxyy.github.io/FLLauncher/) · [Compiled Windows release](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.5.2)**
 
 This public repository contains the project website and release information. The launcher source code is not published.
 
@@ -35,9 +35,9 @@ FLLauncher uses its own Microsoft application registration, approved for the Min
 
 ## Download
 
-Download **FLLauncher-0.5.1-Windows.exe** from [Releases](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.5.1). This is a portable Windows x64 application. No source build or Node.js installation is needed.
+Download **FLLauncher-0.5.2-Windows.exe** from [Releases](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.5.2). This is a portable Windows x64 application. No source build or Node.js installation is needed.
 
-SHA-256: `cede335fac32a0fbaf6f6b72af2a0b81c2e16c240c51df3222f2d6e362776324`
+SHA-256: `d3ef45f722f22d9b953883c13bbf21617a14fbe6aca0c0f13c95dd6c3452b54e`
 
 ## Website
 
