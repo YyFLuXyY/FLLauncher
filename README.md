@@ -2,7 +2,7 @@
 
 Independent Minecraft launcher and modpack manager for Windows x64.
 
-**[Project website](https://yyfluxyy.github.io/FLLauncher/) · [Compiled Windows release](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.5.5)**
+**[Project website](https://yyfluxyy.github.io/FLLauncher/) · [Compiled Windows release](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.5.6)**
 
 This public repository contains the project website and release information. The launcher source code is not published.
 
@@ -37,9 +37,11 @@ FLLauncher uses its own Microsoft application registration, approved for the Min
 
 ## Download
 
-Download **FLLauncher-0.5.5-Windows.exe** from [Releases](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.5.5). This is a portable Windows x64 application. No source build or Node.js installation is needed.
+Download **FLLauncher-0.5.6-Windows.exe** from [Releases](https://github.com/YyFLuXyY/FLLauncher/releases/tag/v0.5.6). This is a portable Windows x64 application. Run the EXE to launch it.
 
-SHA-256: `68387577517dae09b67138dab3be744a9103d7d2a6af29baa6452117647a8995`
+To upgrade from 0.5.3–0.5.5, close Minecraft and FLLauncher, then download and run the new EXE once. If your old executable has a sibling `data` folder, place the new EXE next to that same folder. If you use an unpacked installation and want to keep its shortcut, extract the update ZIP over the application folder while the launcher is closed. Future updates are available from the launcher settings.
+
+SHA-256: `73c88bdae57fbd030958583314da77f651531145d4477acbe8f62eb2528e5eb7`
 
 ## Website
 
